@@ -56,3 +56,9 @@ type Points struct {
 	X interface{} `json:"x"`
 	Y interface{} `json:"y"`
 }
+
+type BubblePoints struct {
+	X interface{} `json:"x"`
+	Y interface{} `json:"y"`
+	R interface{} `json:"r"`
+}

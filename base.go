@@ -25,7 +25,7 @@ type Theme struct {
 }
 
 type Base struct {
-	Type    string `json:"type"`
+	Type    string `json:"type,omitempty"`
 	Data    `json:"data"`
 	Options `json:"options"`
 }

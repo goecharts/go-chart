@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"math/rand"
 	"net/http"
 	"time"
 
@@ -194,6 +195,103 @@ func exampleDoughnut() charts.Doughnut {
 	return doughnut
 
 }
+func exampleBarAndLine() charts.Chart {
+	chart := charts.NewChart("Chart js Chart", charts.BarType)
+	chart.SetLabels([]interface{}{"Jan", "Feb", "Mar", "Apr", "May", "June", "July"})
+	datasets := []charts.DataSet{
+		{
+			Type:            charts.LineType,
+			Data:            []interface{}{52, -10, 20, 45, 4, -2, 10},
+			BackgroundColor: charts.Orange(),
+			BorderColor:     charts.Orange(),
+			Fill:            false,
+			Label:           "$ First",
+		}, {
+			Type:            charts.BarType,
+			Data:            []interface{}{10, -20, 30, 2, 3, 8, 18},
+			BorderColor:     charts.Purple(),
+			BackgroundColor: charts.Purple(),
+			Label:           "$ Second",
+		},
+	}
+	chart.SetDataSetDefault(datasets)
+	chart.SetResponsive(true)
+	return chart
+}
+func randNumber(max int) int {
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	return r.Intn(max)
+}
+func exampleBubble() charts.Bubble {
+	bubble := charts.NewBubble("Chart js Bubble")
+	datasets := []charts.DataSet{
+		{
+			Label: "$ FIRST",
+			Data: []interface{}{
+				charts.BubblePoints{
+					X: randNumber(100),
+					Y: randNumber(80),
+					R: randNumber(40),
+				},
+				charts.BubblePoints{
+					X: randNumber(100),
+					Y: randNumber(80),
+					R: randNumber(40),
+				},
+				charts.BubblePoints{
+					X: randNumber(100),
+					Y: randNumber(80),
+					R: randNumber(40),
+				},
+				charts.BubblePoints{
+					X: randNumber(100),
+					Y: randNumber(80),
+					R: randNumber(40),
+				},
+				charts.BubblePoints{
+					X: randNumber(100),
+					Y: randNumber(80),
+					R: randNumber(40),
+				},
+			},
+			BackgroundColor: charts.Purple(),
+			BorderColor:     charts.Purple(),
+		}, {
+			Label: "$ Second",
+			Data: []interface{}{
+				charts.BubblePoints{
+					X: randNumber(100),
+					Y: randNumber(80),
+					R: randNumber(40),
+				},
+				charts.BubblePoints{
+					X: randNumber(100),
+					Y: randNumber(80),
+					R: randNumber(40),
+				},
+				charts.BubblePoints{
+					X: randNumber(100),
+					Y: randNumber(80),
+					R: randNumber(40),
+				},
+				charts.BubblePoints{
+					X: randNumber(100),
+					Y: randNumber(80),
+					R: randNumber(40),
+				},
+				charts.BubblePoints{
+					X: randNumber(100),
+					Y: randNumber(80),
+					R: randNumber(40),
+				},
+			},
+			BackgroundColor: charts.Red(),
+			BorderColor:     charts.Red(),
+		},
+	}
+	bubble.SetDataSetDefault(datasets)
+	return bubble
+}
 
 func main() {
 	line := exampleLine()
@@ -203,6 +301,8 @@ func main() {
 	pie := examplePie()
 	polarArea := examplePolarArea()
 	doughnut := exampleDoughnut()
+	chart := exampleBarAndLine()
+	bubble := exampleBubble()
 
 	//c, _ := json.MarshalIndent(scatter.Base, " ", " ")
 	//fmt.Println(string(c))
@@ -214,6 +314,8 @@ func main() {
 	http.HandleFunc(fmt.Sprintf("/%s", pie.Type), logger(pie.Plot))
 	http.HandleFunc(fmt.Sprintf("/%s", polarArea.Type), logger(polarArea.Plot))
 	http.HandleFunc(fmt.Sprintf("/%s", doughnut.Type), logger(doughnut.Plot))
+	http.HandleFunc(fmt.Sprintf("/%s", chart.Name()), logger(chart.Plot))
+	http.HandleFunc(fmt.Sprintf("/%s", bubble.Type), logger(bubble.Plot))
 	log.Fatal(http.ListenAndServe(":9090", nil))
 
 }
