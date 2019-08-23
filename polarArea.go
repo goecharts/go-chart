@@ -9,6 +9,11 @@ type PolarArea struct {
 func (P PolarArea) Plot(w http.ResponseWriter, r *http.Request) {
 	toHandle(w, r, P.Base)
 }
+
+func (P PolarArea) Render(w http.ResponseWriter, r *http.Request) {
+	P.Plot(w, r)
+}
+
 func (P PolarArea) Save(name string) bool {
 	if name == "" {
 		name = "polarArea"

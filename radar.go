@@ -10,6 +10,10 @@ func (R Radar) Plot(w http.ResponseWriter, r *http.Request) {
 	toHandle(w, r, R.Base)
 }
 
+func (R Radar) Render(w http.ResponseWriter, r *http.Request) {
+	R.Plot(w, r)
+}
+
 func (R Radar) Name() string {
 	return R.Type
 }

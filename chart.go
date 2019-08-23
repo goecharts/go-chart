@@ -9,7 +9,9 @@ type Chart struct {
 func (C Chart) Plot(w http.ResponseWriter, r *http.Request) {
 	toHandle(w, r, C.Base)
 }
-
+func (C Chart) Render(w http.ResponseWriter, r *http.Request) {
+	C.Plot(w, r)
+}
 func (C Chart) Save(name string) bool {
 	if name == "" {
 		name = "chart"

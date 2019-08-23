@@ -9,6 +9,10 @@ type Bubble struct {
 func (B Bubble) Plot(w http.ResponseWriter, r *http.Request) {
 	toHandle(w, r, B.Base)
 }
+func (B Bubble) Render(w http.ResponseWriter, r *http.Request) {
+	B.Plot(w, r)
+}
+
 func (B Bubble) Save(name string) bool {
 	if name == "" {
 		name = "bubble"

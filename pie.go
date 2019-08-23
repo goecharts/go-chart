@@ -10,6 +10,10 @@ func (P Pie) Plot(w http.ResponseWriter, r *http.Request) {
 	toHandle(w, r, P.Base)
 }
 
+func (P Pie) Render(w http.ResponseWriter, r *http.Request) {
+	P.Plot(w, r)
+}
+
 func (P Pie) Save(name string) bool {
 	if name == "" {
 		name = "pie"

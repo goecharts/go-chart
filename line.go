@@ -12,6 +12,10 @@ func (L Line) Plot(w http.ResponseWriter, r *http.Request) {
 	toHandle(w, r, L.Base)
 }
 
+func (L Line) Render(w http.ResponseWriter, r *http.Request) {
+	L.Plot(w, r)
+}
+
 func (L Line) Save(name string) bool {
 	if name == "" {
 		name = "line"

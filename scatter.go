@@ -10,6 +10,10 @@ func (S Scatter) Plot(w http.ResponseWriter, r *http.Request) {
 	toHandle(w, r, S.Base)
 }
 
+func (S Scatter) Render(w http.ResponseWriter, r *http.Request) {
+	S.Plot(w, r)
+}
+
 func (S Scatter) Save(name string) bool {
 	if name == "" {
 		name = "scatter"

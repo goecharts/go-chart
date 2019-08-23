@@ -10,6 +10,10 @@ func (B Bar) Plot(w http.ResponseWriter, req *http.Request) {
 	toHandle(w, req, B.Base)
 }
 
+func (B Bar) Render(w http.ResponseWriter, req *http.Request) {
+	B.Plot(w, req)
+}
+
 func (B Bar) Save(name string) bool {
 	if name == "" {
 		name = "bar"
