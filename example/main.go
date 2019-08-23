@@ -27,6 +27,7 @@ func exampleLine() *charts.Line {
 			Data:            []interface{}{11, 2, 30, 14, 5, 23, 7},
 			BackgroundColor: charts.Purple(),
 			BorderColor:     charts.Purple(),
+			Fill:            charts.FILLFALSE,
 		},
 		{
 			Label:           "My Second DataSet",
@@ -37,14 +38,7 @@ func exampleLine() *charts.Line {
 			BorderDash:      []int{5, 5},
 		},
 	}
-	one := charts.OneDataSet{}
-	one.SetDefault(dataset[0])
-	one.SetProperty("borderWidth", 2)
-
-	line.SetDataSet([]interface{}{one, dataset[1]})
-
-	line.SetXAxes([]string{"Month"})
-	line.SetYAxes([]string{"Value"})
+	line.SetDataSetDefault(dataset)
 	return line
 }
 
