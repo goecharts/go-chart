@@ -50,18 +50,17 @@ type Scales struct {
 	X []Axes `json:"xAxes,omitempty"`
 	Y []Axes `json:"yAxes,omitempty"`
 }
-
-type AxesOptions map[string]interface{}
-
-func (A AxesOptions) AddAxesOption(key string, val interface{}) {
-	A[key] = val
-}
-
 type Axes struct {
 	Display    bool       `json:"display,omitempty"`
 	ScaleLabel ScaleLabel `json:"scaleLabel,omitempty"`
 	Ticks      Ticks      `json:"ticks,omitempty"`
 	Position   string     `json:"position,omitempty"`
+}
+
+type AxesOptions map[string]interface{}
+
+func (A AxesOptions) AddAxesOption(key string, val interface{}) {
+	A[key] = val
 }
 
 type ScaleLabel struct {
